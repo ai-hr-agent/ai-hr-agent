@@ -1,0 +1,74 @@
+[
+  {
+    "id": 1,
+    "name": "Ana Silva",
+    "position": "Desenvolvedora Senior",
+    "department": "Tecnologia",
+    "performance": 85,
+    "satisfaction": 92,
+    "productivity": 78,
+    "status": "active",
+    "avatar": "/images/avatar1.svg",
+    "lastActivity": "2025-11-02T10:30:00Z"
+  },
+  {
+    "id": 2,
+    "name": "Carlos Santos",
+    "position": "Gerente de Projeto",
+    "department": "Gestão",
+    "performance": 78,
+    "satisfaction": 88,
+    "productivity": 82,
+    "status": "active",
+    "avatar": "/images/avatar2.svg",
+    "lastActivity": "2025-11-02T09:15:00Z"
+  },
+  {
+    "id": 3,
+    "name": "Maria Oliveira",
+    "position": "Designer UX",
+    "department": "Design",
+    "performance": 92,
+    "satisfaction": 95,
+    "productivity": 88,
+    "status": "active",
+    "avatar": "/images/avatar3.svg",
+    "lastActivity": "2025-11-02T11:00:00Z"
+  },
+  {
+    "id": 4,
+    "name": "João Pereira",
+    "position": "Analista de Dados",
+    "department": "Analytics",
+    "performance": 88,
+    "satisfaction": 85,
+    "productivity": 91,
+    "status": "active",
+    "avatar": "/images/avatar4.svg",
+    "lastActivity": "2025-11-02T08:45:00Z"
+  },
+  {
+    "id": 5,
+    "name": "Lucia Costa",
+    "position": "HR Specialist",
+    "department": "RH",
+    "performance": 83,
+    "satisfaction": 90,
+    "productivity": 85,
+    "status": "active",
+    "avatar": "/images/avatar5.svg",
+    "lastActivity": "2025-11-01T16:30:00Z"
+  },
+  {
+    "id": 6,
+    "name": "Roberto Lima",
+    "position": "DevOps Engineer",
+    "department": "Tecnologia",
+    "performance": 90,
+    "satisfaction": 87,
+    "productivity": 93,
+    "status": "vacation",
+    "avatar": "/images/avatar6.svg",
+    "lastActivity": "2025-10-30T17:00:00Z"
+  }
+]

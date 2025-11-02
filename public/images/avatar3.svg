@@ -1,0 +1,30 @@
+<svg width="100" height="100" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background circle -->
+  <defs>
+    <linearGradient id="mariaGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#9c27b0;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#7b1fa2;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <circle cx="50" cy="50" r="50" fill="url(#mariaGradient)"/>
+  
+  <!-- Female avatar with creative style -->
+  <g fill="white">
+    <!-- Head -->
+    <circle cx="50" cy="35" r="15"/>
+    <!-- Stylish hair -->
+    <path d="M32 25 Q50 15 68 25 Q68 32 65 38 Q60 33 50 33 Q40 33 35 38 Q32 32 32 25"/>
+    <!-- Design glasses -->
+    <g stroke="white" stroke-width="1.5" fill="none">
+      <circle cx="44" cy="35" r="4"/>
+      <circle cx="56" cy="35" r="4"/>
+      <line x1="48" y1="35" x2="52" y2="35"/>
+    </g>
+    <!-- Body -->
+    <path d="M50 55 C38 55, 30 62, 30 72 L30 80 L70 80 L70 72 C70 62, 62 55, 50 55"/>
+  </g>
+  
+  <!-- Initial -->
+  <text x="50" y="90" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="12" font-weight="bold">MO</text>
+</svg>

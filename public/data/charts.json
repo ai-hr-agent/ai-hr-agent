@@ -1,0 +1,18 @@
+{
+  "performance": {
+    "labels": ["Jan", "Fev", "Mar", "Abr", "Mai", "Jun"],
+    "data": [78, 82, 85, 88, 87, 90]
+  },
+  "departments": {
+    "labels": ["Tecnologia", "RH", "Gestão", "Design", "Analytics"],
+    "data": [85, 78, 82, 92, 88]
+  },
+  "satisfaction": {
+    "labels": ["Jan", "Fev", "Mar", "Abr", "Mai", "Jun"],
+    "data": [82, 85, 87, 89, 91, 88]
+  },
+  "status": {
+    "labels": ["Ativos", "Férias", "Licença", "Treinamento"],
+    "data": [85, 8, 4, 3]
+  }
+}

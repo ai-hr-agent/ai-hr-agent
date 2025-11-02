@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Debug - AI HR Agent</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; }
+        .debug { background: #f5f5f5; padding: 10px; margin: 10px 0; border-radius: 5px; }
+        .card { background: white; padding: 15px; margin: 10px 0; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+    </style>
+</head>
+<body>
+    <h1>Debug - Carregamento de Dados</h1>
+    
+    <div class="debug" id="debug-info">
+        <p>Carregando dados...</p>
+    </div>
+    
+    <div class="debug">
+        <h3>Métricas do Dashboard:</h3>
+        <p>Total de Funcionários: <span id="total-employees">-</span></p>
+        <p>Funcionários em Risco: <span id="at-risk-employees">-</span></p>
+        <p>Performance Média: <span id="avg-performance">-</span></p>
+        <p>Satisfação Média: <span id="avg-satisfaction">-</span></p>
+    </div>
+    
+    <div class="debug">
+        <h3>Funcionários:</h3>
+        <div id="employees-list"></div>
+    </div>
+    
+    <div class="debug">
+        <h3>Recomendações:</h3>
+        <div id="recommendations-list"></div>
+    </div>
+
+    <script>
+        // Global variables
+        let employees = [];
+        let recommendations = [];
+
+        // Load data from JSON files
+        async function loadData() {
+            const debugInfo = document.getElementById('debug-info');
+            
+            try {
+                debugInfo.innerHTML = '<p>🔄 Carregando dados dos arquivos JSON...</p>';
+                
+                const [employeesResponse, recommendationsResponse] = await Promise.all([
+                    fetch('/data/employees.json'),
+                    fetch('/data/recommendations.json')
+                ]);
+
+                debugInfo.innerHTML = '<p>📥 Respostas recebidas, fazendo parse do JSON...</p>';
+                
+                employees = await employeesResponse.json();
+                recommendations = await recommendationsResponse.json();
+                
+                debugInfo.innerHTML = `
+                    <p>✅ Dados carregados com sucesso!</p>
+                    <p>• ${employees.length} funcionários carregados</p>
+                    <p>• ${recommendations.length} recomendações carregadas</p>
+                `;
+                
+                // Initialize dashboard
+                updateDashboard();
+                displayEmployees();
+                displayRecommendations();
+                
+            } catch (error) {
+                console.error('Error loading data:', error);
+                debugInfo.innerHTML = `<p>❌ Erro ao carregar dados: ${error.message}</p>`;
+            }
+        }
+
+        function updateDashboard() {
+            const totalEmployees = employees.length;
+            const atRiskEmployees = employees.filter(emp => emp.performance < 80 || emp.satisfaction < 80).length;
+            const avgPerformance = Math.round(employees.reduce((sum, emp) => sum + emp.performance, 0) / totalEmployees);
+            const avgSatisfaction = Math.round(employees.reduce((sum, emp) => sum + emp.satisfaction, 0) / totalEmployees);
+
+            document.getElementById('total-employees').textContent = totalEmployees;
+            document.getElementById('at-risk-employees').textContent = atRiskEmployees;
+            document.getElementById('avg-performance').textContent = `${avgPerformance}%`;
+            document.getElementById('avg-satisfaction').textContent = `${avgSatisfaction}%`;
+        }
+
+        function displayEmployees() {
+            const container = document.getElementById('employees-list');
+            container.innerHTML = '';
+            
+            employees.forEach(employee => {
+                const card = document.createElement('div');
+                card.className = 'card';
+                card.innerHTML = `
+                    <h4>${employee.name}</h4>
+                    <p><strong>Cargo:</strong> ${employee.position}</p>
+                    <p><strong>Departamento:</strong> ${employee.department}</p>
+                    <p><strong>Performance:</strong> ${employee.performance}%</p>
+                    <p><strong>Satisfação:</strong> ${employee.satisfaction}%</p>
+                    <p><strong>Status:</strong> ${employee.status}</p>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        function displayRecommendations() {
+            const container = document.getElementById('recommendations-list');
+            container.innerHTML = '';
+            
+            recommendations.forEach(rec => {
+                const card = document.createElement('div');
+                card.className = 'card';
+                card.innerHTML = `
+                    <h4>${rec.title}</h4>
+                    <p><strong>Descrição:</strong> ${rec.description}</p>
+                    <p><strong>Prioridade:</strong> ${rec.priority}</p>
+                    <p><strong>Departamento:</strong> ${rec.department}</p>
+                    <p><strong>Impacto:</strong> ${rec.impact}</p>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        // Start loading data when page loads
+        document.addEventListener('DOMContentLoaded', loadData);
+    </script>
+</body>
+</html>

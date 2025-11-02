@@ -1,0 +1,53 @@
+[
+  {
+    "id": 1,
+    "title": "Implementar programa de mentoria",
+    "description": "Criar programa de mentoria para desenvolver talentos internos",
+    "priority": "high",
+    "department": "RH",
+    "impact": "Alto potencial de retenção de talentos",
+    "analysis": "Com base na análise de dados de performance e satisfação dos funcionários, identificamos que 68% dos colaboradores júniors demonstram interesse em crescimento profissional, mas apenas 23% têm acesso a orientação estruturada. A implementação de um programa de mentoria pode aumentar a retenção em até 40% e acelerar o desenvolvimento de competências técnicas em 35%. O ROI estimado é de 300% no primeiro ano, considerando redução de turnover e aumento de produtividade.",
+    "expectedResults": [
+      "Redução de 40% no turnover de funcionários júniors",
+      "Aumento de 35% na velocidade de desenvolvimento de competências",
+      "Melhoria de 25% nos scores de satisfação no trabalho",
+      "ROI de 300% no primeiro ano"
+    ],
+    "timeline": "3-6 meses para implementação completa",
+    "resources": "1 coordenador, budget de R$ 15.000 para treinamentos"
+  },
+  {
+    "id": 2,
+    "title": "Otimizar processo de feedback",
+    "description": "Automatizar coleta e análise de feedback de performance",
+    "priority": "medium",
+    "department": "Gestão",
+    "impact": "Melhoria na comunicação e desenvolvimento",
+    "analysis": "A análise dos dados de feedback atual revela que 45% dos gestores relatam dificuldades em fornecer feedback estruturado, e 60% dos funcionários gostariam de receber feedback mais frequente. O sistema atual de avaliações semestrais não atende às necessidades de desenvolvimento contínuo. A implementação de um sistema automatizado de feedback 360° pode melhorar a qualidade das avaliações em 50% e aumentar a frequência de feedback de 2x para 12x ao ano.",
+    "expectedResults": [
+      "Aumento de 50% na qualidade do feedback",
+      "Feedback 6x mais frequente (mensal vs semestral)",
+      "Redução de 60% no tempo gasto em processos de avaliação",
+      "Melhoria de 30% na comunicação entre gestores e equipes"
+    ],
+    "timeline": "2-4 meses para desenvolvimento e implementação",
+    "resources": "1 desenvolvedor, integração com sistemas existentes"
+  },
+  {
+    "id": 3,
+    "title": "Programa de bem-estar",
+    "description": "Lançar iniciativas de saúde mental e bem-estar",
+    "priority": "high",
+    "department": "RH",
+    "impact": "Redução do estresse e aumento da produtividade",
+    "analysis": "Os dados de satisfação indicam que 38% dos funcionários reportam níveis elevados de estresse, correlacionando com uma redução média de 22% na produtividade. Empresas similares que implementaram programas de bem-estar viram redução de 30% no absenteísmo e aumento de 25% na satisfação geral. O programa proposto inclui sessões de mindfulness, consultas psicológicas online, horários flexíveis e espaços de relaxamento.",
+    "expectedResults": [
+      "Redução de 30% nos níveis de estresse reportados",
+      "Diminuição de 25% no absenteísmo",
+      "Aumento de 20% na produtividade geral",
+      "Melhoria de 35% nos scores de bem-estar"
+    ],
+    "timeline": "1-3 meses para lançamento inicial",
+    "resources": "Parcerias com profissionais de saúde, budget de R$ 25.000"
+  }
+]

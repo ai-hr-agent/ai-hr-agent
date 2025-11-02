@@ -1,0 +1,15 @@
+[build]
+  # Directory with static files
+  publish = "public"
+  
+  # No build command needed for static site
+  command = "echo 'Static site - no build required'"
+
+[build.environment]
+  # No environment variables needed
+
+[[redirects]]
+  # SPA redirect for client-side routing
+  from = "/*"
+  to = "/index.html"
+  status = 200

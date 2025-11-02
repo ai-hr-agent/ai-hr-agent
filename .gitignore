@@ -1,0 +1,7 @@
+# Build directory
+/node_modules
+/server.js
+/package*.json
+
+# Include only static files
+!public/

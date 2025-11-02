@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI HR Agent - Dashboard</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="logo">
+                <i class="fas fa-robot"></i>
+                <h2>AI HR Agent</h2>
+            </div>
+            <nav class="nav-menu">
+                <a href="#dashboard" class="nav-item active">
+                    <i class="fas fa-tachometer-alt"></i>
+                    Dashboard
+                </a>
+                <a href="#employees" class="nav-item">
+                    <i class="fas fa-users"></i>
+                    Funcionários
+                </a>
+                <a href="#recommendations" class="nav-item">
+                    <i class="fas fa-lightbulb"></i>
+                    Recomendações
+                </a>
+                <a href="#analytics" class="nav-item">
+                    <i class="fas fa-chart-bar"></i>
+                    Analytics
+                </a>
+                <a href="#settings" class="nav-item">
+                    <i class="fas fa-cog"></i>
+                    Configurações
+                </a>
+                <a href="#about" class="nav-item">
+                    <i class="fas fa-info-circle"></i>
+                    Sobre
+                </a>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header class="header">
+                <div class="header-left">
+                    <h1 id="page-title">Dashboard</h1>
+                    <p class="subtitle">Visão geral do sistema de RH</p>
+                </div>
+                <div class="header-right">
+                    <div class="search-box">
+                        <i class="fas fa-search"></i>
+                        <input type="text" placeholder="Buscar funcionário...">
+                    </div>
+                    <div class="notifications">
+                        <i class="fas fa-bell"></i>
+                        <span class="notification-badge">3</span>
+                    </div>
+                    <div class="user-profile">
+                        <img src="/images/user-avatar.svg" alt="Admin User" class="user-avatar">
+                        <span>Admin</span>
+                    </div>
+                </div>
+            </header>
+
+            <div class="content-area" id="content-area">
+                <!-- Dashboard Content -->
+                <div id="dashboard-content" class="page-content active">
+                    <!-- Metrics Cards -->
+                    <div class="metrics-grid">
+                        <div class="metric-card">
+                            <div class="metric-icon">
+                                <i class="fas fa-users"></i>
+                            </div>
+                            <div class="metric-info">
+                                <h3 id="total-employees">150</h3>
+                                <p>Total de Funcionários</p>
+                            </div>
+                        </div>
+                        <div class="metric-card">
+                            <div class="metric-icon">
+                                <i class="fas fa-chart-line"></i>
+                            </div>
+                            <div class="metric-info">
+                                <h3 id="avg-performance">84.5%</h3>
+                                <p>Performance Média</p>
+                            </div>
+                        </div>
+                        <div class="metric-card">
+                            <div class="metric-icon">
+                                <i class="fas fa-heart"></i>
+                            </div>
+                            <div class="metric-info">
+                                <h3 id="avg-satisfaction">86.2%</h3>
+                                <p>Satisfação Média</p>
+                            </div>
+                        </div>
+                        <div class="metric-card alert">
+                            <div class="metric-icon">
+                                <i class="fas fa-exclamation-triangle"></i>
+                            </div>
+                            <div class="metric-info">
+                                <h3 id="at-risk-employees">8</h3>
+                                <p>Funcionários em Risco</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Main Dashboard Grid -->
+                    <div class="dashboard-grid">
+                        <!-- Recommendations Panel -->
+                        <div class="panel recommendations-panel">
+                            <div class="panel-header">
+                                <h3>Recomendações IA</h3>
+                                <span class="badge">3 Novas</span>
+                            </div>
+                            <div class="panel-content">
+                                <div id="recommendations-list" class="recommendations-list">
+                                    <!-- Recommendations will be loaded here -->
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Recent Employees -->
+                        <div class="panel employees-panel">
+                            <div class="panel-header">
+                                <h3>Funcionários Recentes</h3>
+                                <a href="#employees" class="view-all-link">Ver Todos</a>
+                            </div>
+                            <div class="panel-content">
+                                <div id="recent-employees" class="employees-list">
+                                    <!-- Recent employees will be loaded here -->
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Performance Chart -->
+                        <div class="panel chart-panel">
+                            <div class="panel-header">
+                                <h3>Tendência de Performance</h3>
+                                <div class="chart-controls">
+                                    <select id="chart-period">
+                                        <option value="6months">Últimos 6 meses</option>
+                                        <option value="year">Último ano</option>
+                                        <option value="quarter">Último trimestre</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="panel-content">
+                                <canvas id="performanceChart" width="400" height="200"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Employees Content -->
+                <div id="employees-content" class="page-content">
+                    <div class="employees-header">
+                        <div class="filters">
+                            <select id="department-filter">
+                                <option value="">Todos os Departamentos</option>
+                                <option value="Tecnologia">Tecnologia</option>
+                                <option value="Gestão">Gestão</option>
+                                <option value="Design">Design</option>
+                                <option value="Analytics">Analytics</option>
+                            </select>
+                            <select id="status-filter">
+                                <option value="">Todos os Status</option>
+                                <option value="active">Ativo</option>
+                                <option value="at-risk">Em Risco</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div id="employees-grid" class="employees-grid">
+                        <!-- Employee cards will be loaded here -->
+                    </div>
+                </div>
+
+                <!-- Recommendations Content -->
+                <div id="recommendations-content" class="page-content">
+                    <div class="recommendations-header">
+                        <div class="filters">
+                            <select id="priority-filter">
+                                <option value="">Todas as Prioridades</option>
+                                <option value="high">Alta</option>
+                                <option value="medium">Média</option>
+                                <option value="low">Baixa</option>
+                            </select>
+                            <select id="type-filter">
+                                <option value="">Todos os Tipos</option>
+                                <option value="performance">Performance</option>
+                                <option value="satisfaction">Satisfação</option>
+                                <option value="productivity">Produtividade</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div id="recommendations-grid" class="recommendations-grid">
+                        <!-- Recommendation cards will be loaded here -->
+                    </div>
+                </div>
+
+                <!-- Analytics Content -->
+                <div id="analytics-content" class="page-content">
+                    <div class="analytics-grid">
+                        <div class="panel">
+                            <div class="panel-header">
+                                <h3>Métricas Detalhadas</h3>
+                            </div>
+                            <div class="panel-content">
+                                <div class="metrics-detail">
+                                    <div class="metric-detail-item">
+                                        <span class="metric-label">Taxa de Rotatividade:</span>
+                                        <span class="metric-value" id="turnover-rate">2.1%</span>
+                                    </div>
+                                    <div class="metric-detail-item">
+                                        <span class="metric-label">Score de Engajamento:</span>
+                                        <span class="metric-value" id="engagement-score">78</span>
+                                    </div>
+                                    <div class="metric-detail-item">
+                                        <span class="metric-label">Produtividade Média:</span>
+                                        <span class="metric-value" id="avg-productivity">81.3%</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel">
+                            <div class="panel-header">
+                                <h3>Performance por Departamento</h3>
+                            </div>
+                            <div class="panel-content">
+                                <canvas id="departmentChart" width="400" height="300"></canvas>
+                            </div>
+                        </div>
+                        <div class="panel analytics-chart-wide">
+                            <div class="panel-header">
+                                <h3>Evolução de Satisfação vs Performance</h3>
+                            </div>
+                            <div class="panel-content">
+                                <canvas id="satisfactionChart" width="400" height="200"></canvas>
+                            </div>
+                        </div>
+                        <div class="panel">
+                            <div class="panel-header">
+                                <h3>Distribuição de Status</h3>
+                            </div>
+                            <div class="panel-content">
+                                <canvas id="statusChart" width="400" height="300"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- About Content -->
+                <div id="about-content" class="page-content">
+                    <div class="about-container">
+                        <div class="about-header">
+                            <div class="about-logo">
+                                <i class="fas fa-graduation-cap"></i>
+                                <h2>Projeto Integrador em Computação II</h2>
+                            </div>
+                            <div class="about-info">
+                                <span class="course-code">DRP01-Projeto Integrador em Computação II-Turma 002</span>
+                            </div>
+                        </div>
+                        
+                        <div class="about-content-body">
+                            <div class="project-card">
+                                <div class="project-header">
+                                    <h3><i class="fas fa-robot"></i> Agente de IA para Gestão Proativa de RH</h3>
+                                    <span class="project-type">Relatório Técnico-Científico</span>
+                                </div>
+                                
+                                <div class="authors-section">
+                                    <h4><i class="fas fa-users"></i> Autores</h4>
+                                    <div class="authors-grid">
+                                        <div class="author-card">
+                                            <div class="author-avatar">
+                                                <i class="fas fa-user"></i>
+                                            </div>
+                                            <div class="author-info">
+                                                <strong>Letícia Goes de Andrade</strong>
+                                                <span>Aluna</span>
+                                            </div>
+                                        </div>
+                                        <div class="author-card">
+                                            <div class="author-avatar">
+                                                <i class="fas fa-user"></i>
+                                            </div>
+                                            <div class="author-info">
+                                                <strong>Alex Maia</strong>
+                                                <span>Aluno</span>
+                                            </div>
+                                        </div>
+                                        <div class="author-card">
+                                            <div class="author-avatar">
+                                                <i class="fas fa-user"></i>
+                                            </div>
+                                            <div class="author-info">
+                                                <strong>Luiz Carlos Tadashi Kuwabara</strong>
+                                                <span>Aluno</span>
+                                            </div>
+                                        </div>
+                                        <div class="author-card">
+                                            <div class="author-avatar">
+                                                <i class="fas fa-user"></i>
+                                            </div>
+                                            <div class="author-info">
+                                                <strong>Lucas Gabriel Gallo dos Santos</strong>
+                                                <span>Aluno</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="academic-info">
+                                    <div class="info-section">
+                                        <h4><i class="fas fa-university"></i> Instituição</h4>
+                                        <p><strong>Universidade Virtual do Estado de São Paulo (UNIVESP)</strong></p>
+                                        <div class="courses">
+                                            <span class="course-badge">Tecnologia da Informação</span>
+                                            <span class="course-badge">Ciência de Dados</span>
+                                            <span class="course-badge">Engenharia da Computação</span>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="info-section">
+                                        <h4><i class="fas fa-chalkboard-teacher"></i> Orientação</h4>
+                                        <div class="tutor-info">
+                                            <div class="tutor-avatar">
+                                                <i class="fas fa-user-tie"></i>
+                                            </div>
+                                            <div>
+                                                <strong>Isabella Caroline Martins</strong>
+                                                <span>Tutora Orientadora</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="info-section">
+                                        <h4><i class="fas fa-map-marker-alt"></i> Polos</h4>
+                                        <div class="locations">
+                                            <span class="location-badge"><i class="fas fa-map-pin"></i> Poá</span>
+                                            <span class="location-badge"><i class="fas fa-map-pin"></i> São Caetano do Sul</span>
+                                            <span class="location-badge"><i class="fas fa-map-pin"></i> Guarulhos</span>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="info-section">
+                                        <h4><i class="fas fa-calendar-alt"></i> Ano</h4>
+                                        <p class="year">2025</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="citation-section">
+                                    <h4><i class="fas fa-quote-left"></i> Citação Acadêmica</h4>
+                                    <div class="citation-box">
+                                        <p>ANDRADE, Letícia Goes de; MAIA, Alex; KUWABARA, Luiz Carlos Tadashi; SANTOS, Lucas Gabriel Gallo dos. <strong>Agente de IA para Gestão Proativa de RH</strong>. 00f. Relatório Técnico-Científico. Tecnologia da Informação, Ciência de Dados e Engenharia da Computação – Universidade Virtual do Estado de São Paulo. Tutor: Isabella Caroline Martins. Polo Poá, São Caetano do Sul e Guarulhos, 2025.</p>
+                                    </div>
+                                    <button class="copy-citation-btn" onclick="copyCitation()">
+                                        <i class="fas fa-copy"></i> Copiar Citação
+                                    </button>
+                                </div>
+                                
+                                <div class="demo-info">
+                                    <h4><i class="fas fa-desktop"></i> Sobre este Projeto</h4>
+                                    <p>Aplicação WEB inteligente para <strong>Gestão Proativa de RH</strong> desenvolvido como projeto integrador da UNIVESP.</p>
+                                    
+                                    <div class="tech-stack">
+                                        <h5>Tecnologias Utilizadas no Projeto:</h5>
+                                        <div class="tech-badges">
+                                            <span class="tech-badge">Node.js</span>
+                                            <span class="tech-badge">Express.js</span>
+                                            <span class="tech-badge">Chart.js</span>
+                                            <span class="tech-badge">HTML5</span>
+                                            <span class="tech-badge">CSS3</span>
+                                            <span class="tech-badge">JavaScript</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Recommendation Detail Modal -->
+    <div id="recommendationModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="modalTitle">Detalhes da Recomendação</h2>
+                <span class="close" id="closeModal">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div class="recommendation-detail">
+                    <div class="detail-header">
+                        <div class="priority-indicator" id="modalPriority"></div>
+                    </div>
+                    
+                    <div class="detail-section">
+                        <h4><i class="fas fa-exclamation-circle"></i> Problema Identificado</h4>
+                        <p id="modalProblem"></p>
+                    </div>
+                    
+                    <div class="detail-section">
+                        <h4><i class="fas fa-chart-line"></i> Análise de Dados</h4>
+                        <div id="modalAnalysis" class="analysis-grid"></div>
+                    </div>
+                    
+                    <div class="detail-section">
+                        <h4><i class="fas fa-lightbulb"></i> Razão da Recomendação</h4>
+                        <p id="modalReason"></p>
+                    </div>
+                    
+                    <div class="detail-section">
+                        <h4><i class="fas fa-tasks"></i> Ação Recomendada</h4>
+                        <div class="recommended-action">
+                            <p id="modalAction"></p>
+                            <div class="action-timeline">
+                                <span><i class="fas fa-clock"></i> Prazo sugerido: <strong id="modalTimeline"></strong></span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="detail-section">
+                        <h4><i class="fas fa-target"></i> Resultado Esperado</h4>
+                        <div id="modalExpectedResult"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" id="dismissRecommendation">
+                    <i class="fas fa-times"></i> Dispensar
+                </button>
+                <button class="btn btn-primary" id="acceptRecommendation">
+                    <i class="fas fa-check"></i> Aceitar Recomendação
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script-static.js"></script>
+</body>
+</html>
