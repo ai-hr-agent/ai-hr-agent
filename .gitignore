@@ -5,3 +5,5 @@
 
 # Include only static files
 !public/
+# Local Netlify folder
+.netlify
